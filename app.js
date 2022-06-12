@@ -1,4 +1,6 @@
 // console.log('Hello world');
+
+//Working with modules
 const tutorial=require('./tutorial');
 console.log(tutorial);
 // console.log(tutorial(1,5));
@@ -6,6 +8,7 @@ console.log(tutorial.sum(1,5));
 console.log(tutorial.PI);
 console.log( new tutorial.MathObjects());
 
+//Working with eventEmitter class and events module
 const EventEmitter=require('events');
 const eventEmitter=new EventEmitter();
 eventEmitter.on('tutorial',()=>{
@@ -42,9 +45,11 @@ a.on('name',()=>{
     console.log('My name is:',a.name);
 
 });
+
 a.emit('name');
 b.emit('name');
 
+//Working with readline module
 const readline=require('readline');
 const rl=readline.createInterface({input:process.stdin,output:process.stdout});
 let n1=Math.floor((Math.random()*10)+1);
@@ -75,3 +80,5 @@ rl.on('close',()=>{
     console.log('Correct!!!');
 
 });
+
+//Working with file system module
