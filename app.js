@@ -189,12 +189,12 @@ const fs=require('fs');
 // });
 
 
-const readStream=fs.createReadStream('./example','utf8',(err)=>{
+const readStream=fs.createReadStream('./example.txt','utf8',(err)=>{
     if(err){
         console.log(err);
     }
     else{
-        const writeStream=fs.createWriteStream('example2.txt');
+        const writeStream=fs.createWriteStream('./example2.txt');
         readStream.on('data',(chunk)=>{
             console.log(chunk);
             writeStream.write(chunk);
