@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SIGNUP FORM</title>
+    </head>
+    <body>
+        <form>
+            <label>Email:</label>
+            <input type="email" id="email"/><br/>
+            <label>Name:</label>
+            <input type="text" id="name"/><br/>
+           <label>Password:</label>
+           <input type="password" id="pass"/><br/>
+           <button id="btn">Sign up</button> 
+        </form>
+
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script>
+            let btn=document.getElementById('btn');
+            btn.addEventListener('click',async function(e){
+
+                e.preventDefault();
+                let email=document.getElementById('email').value;
+                let name=document.getElementById('name').value;
+                let pass=document.getElementById('pass').value;
+    
+                // axios fetch
+                //axios is used to send data from frontend to backend using post method 
+                let resp=await axios.post('/auth/signup',{email,name,pass});
+                console.log('Response:',resp);
+            });
+        
+        </script>
+
+    </body>
+</html>

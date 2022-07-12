@@ -1,7 +1,7 @@
 const express=require('express');
 const app=express();
 
-//middleware function->post, front->json
+//middleware function->post, frontend->json
 app.use(express.json());
 app.listen(3000);
 
@@ -22,21 +22,36 @@ let users=[
 
 ];
 
-app.get('/users',(req,res)=>{
-    console.log(req.query);
-    res.send(users);
-})
+//mini app
+const userRouter=express.Router();
 
-app.post('/users',(req,res)=>{
+//base route,router to use
+app.use('/users',userRouter);
+
+userRouter
+.route('/')
+.get(getUser)
+.post(postUser)
+.patch(patchUser)
+.delete(deleteUser)
+
+userRouter.route('/:id').get(getUserById)
+
+function getUser(req,res){
+    //console.log(req.query);
+    res.send(users);
+}
+
+function postUser(req,res){
     console.log(req.body);
     users=req.body;
     res.json({
         message:"Data received successfully",
         user:req.body
     });
-});
+}
 
-app.patch('/users',(req,res)=>{
+function patchUser(req,res){
     console.log(req.body);
     let data=req.body;
     for(key in req.body){
@@ -46,19 +61,18 @@ app.patch('/users',(req,res)=>{
     }
     res.json({
         message:"Data updated successfully"
-    })
-});
+    });
+}
 
-app.delete('/users',(req,res)=>{
+function deleteUser(req,res){
     users={};
     res.json({
         message:"Data has been successfully deleted"
     });
-});
+}
 
-
-app.get('/users/:username',(req,res)=>{
-    console.log(req.params.username);
+function getUserById(req,res){
+    console.log(req.params.id);
     console.log(req.params);
     res.send("Data received successfully");
-})
+}
