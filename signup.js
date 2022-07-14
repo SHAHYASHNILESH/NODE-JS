@@ -1,5 +1,6 @@
 const express=require('express');
 const mongoose=require('mongoose');
+const emailValidator=require('email-validator');
 const app=express();
 
 //middleware function->post, front->json
@@ -37,7 +38,7 @@ async function postSignUp(req,res){
     //let obj=req.body;
     let dataObj=req.body;
     let user=await userModel.create(dataObj);
-    console.log('Backend:',user);
+    //console.log('Backend:',user);
     res.json({
         message:"User signed up successfully",
         data:user
@@ -61,7 +62,10 @@ const userSchema=mongoose.Schema({
     email:{
         type:String,
         required:true,
-        unique:true
+        unique:true,
+        validate:function(){
+            return emailValidator.validate(this.email);
+        }
     },
     password:{
         type:String,
@@ -71,9 +75,27 @@ const userSchema=mongoose.Schema({
     confirmPassword:{
         type:String,
         required:true,
-        minLength:8
+        minLength:8,
+        validate:function(){
+            return this.confirmPassword==this.password;
+        }
     }
 });
+
+//pre-post hooks
+//before save event occurs in db
+userSchema.pre('save',function(){
+    //console.log('Before saving in db:',this);
+    this.confirmPassword=undefined;
+});
+
+//after save event occurs in db
+userSchema.post('save',function(doc){
+    console.log('After saving in db:',doc);
+});
+
+//remove
+
 
 const userModel=mongoose.model('userModel',userSchema);
 // (async function createUser(){
