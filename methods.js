@@ -1,4 +1,5 @@
 const express=require('express');
+const mongoose=require('mongoose');
 const app=express();
 
 //middleware function->post, frontend->json
@@ -37,9 +38,14 @@ userRouter
 
 userRouter.route('/:id').get(getUserById)
 
-function getUser(req,res){
+async function getUser(req,res){
     //console.log(req.query);
-    res.send(users);
+    //let allUsers=await userModel.find();
+    let allUsers=await userModel.findOne({name:'Pinal'});
+    res.json({
+        message:'List of all users',
+        data:allUsers
+    });
 }
 
 function postUser(req,res){
@@ -76,3 +82,37 @@ function getUserById(req,res){
     console.log(req.params);
     res.send("Data received successfully");
 }
+
+
+const db_link='mongodb+srv://admin:RSZHek7KCmdYYSPn@cluster0.ptf4r.mongodb.net/?retryWrites=true&w=majority';
+mongoose.connect(db_link)
+.then(function(db){
+    console.log('db connected successfully');
+})
+.catch(function(err){
+    console.log(err);
+})
+
+const userSchema=mongoose.Schema({
+    name:{
+        type:String,
+        required:true
+    },
+    email:{
+        type:String,
+        required:true,
+        unique:true
+    },
+    password:{
+        type:String,
+        required:true,
+        minLength:8  
+    },
+    confirmPassword:{
+        type:String,
+        required:true,
+        minLength:8
+    }
+});
+
+const userModel=mongoose.model('userModel',userSchema);

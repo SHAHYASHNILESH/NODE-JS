@@ -33,12 +33,14 @@ function getSignUp(req,res,next){
     next();
 }
 
-function postSignUp(req,res){
-    let obj=req.body;
-    console.log('Backend:',obj);
+async function postSignUp(req,res){
+    //let obj=req.body;
+    let dataObj=req.body;
+    let user=await userModel.create(dataObj);
+    console.log('Backend:',user);
     res.json({
         message:"User signed up successfully",
-        data:obj
+        data:user
     });
 }
 
@@ -74,13 +76,13 @@ const userSchema=mongoose.Schema({
 });
 
 const userModel=mongoose.model('userModel',userSchema);
-(async function createUser(){
-    let user={
-        name:'Nilesh',
-        email:'nileshshah0409@yahoo.co.in',
-        password:'87654321',
-        confirmPassword:'87654321'
-    };
-    let data=await userModel.create(user);
-    console.log(data);
-})();
+// (async function createUser(){
+//     let user={
+//         name:'Nilesh',
+//         email:'nileshshah0409@yahoo.co.in',
+//         password:'87654321',
+//         confirmPassword:'87654321'
+//     };
+//     let data=await userModel.create(user);
+//     console.log(data);
+// })();
