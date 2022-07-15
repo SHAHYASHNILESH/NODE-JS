@@ -45,6 +45,7 @@ async function loginUser(req,res){
             let user=await userModel.findOne({email:data.email});
             if(user){
                 if(user.password==data.password){
+                    res.cookie('isLoggedIn',true);
                     res.json({
                         message:"User has logged in successfully",
                         userDetails:data

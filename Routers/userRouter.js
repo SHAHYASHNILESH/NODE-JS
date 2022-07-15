@@ -1,10 +1,11 @@
 const express=require('express');
 const userModel=require('../models/userModel');
 const userRouter=express.Router();
+const protectRoute=require('./authHelper');
 
 userRouter
 .route('/')
-.get(getUser)
+.get(protectRoute,getUser)
 .post(postUser)
 .patch(patchUser)
 .delete(deleteUser)
@@ -86,5 +87,6 @@ function getCookie(req,res){
     res.send('Cookies received successfully');
 
 }
+
 
 module.exports=userRouter;
