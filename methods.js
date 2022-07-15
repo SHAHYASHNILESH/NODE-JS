@@ -1,5 +1,6 @@
 const express=require('express');
 const mongoose=require('mongoose');
+const userModel=require('./models/userModels');
 const app=express();
 
 //middleware function->post, frontend->json
@@ -88,35 +89,35 @@ function getUserById(req,res){
 }
 
 
-const db_link='mongodb+srv://admin:RSZHek7KCmdYYSPn@cluster0.ptf4r.mongodb.net/?retryWrites=true&w=majority';
-mongoose.connect(db_link)
-.then(function(db){
-    console.log('db connected successfully');
-})
-.catch(function(err){
-    console.log(err);
-})
+// const db_link='mongodb+srv://admin:RSZHek7KCmdYYSPn@cluster0.ptf4r.mongodb.net/?retryWrites=true&w=majority';
+// mongoose.connect(db_link)
+// .then(function(db){
+//     console.log('db connected successfully');
+// })
+// .catch(function(err){
+//     console.log(err);
+// })
 
-const userSchema=mongoose.Schema({
-    name:{
-        type:String,
-        required:true
-    },
-    email:{
-        type:String,
-        required:true,
-        unique:true
-    },
-    password:{
-        type:String,
-        required:true,
-        minLength:8  
-    },
-    confirmPassword:{
-        type:String,
-        required:true,
-        minLength:8
-    }
-});
+// const userSchema=mongoose.Schema({
+//     name:{
+//         type:String,
+//         required:true
+//     },
+//     email:{
+//         type:String,
+//         required:true,
+//         unique:true
+//     },
+//     password:{
+//         type:String,
+//         required:true,
+//         minLength:8  
+//     },
+//     confirmPassword:{
+//         type:String,
+//         required:true,
+//         minLength:8
+//     }
+// });
 
-const userModel=mongoose.model('userModel',userSchema);
+// const userModel=mongoose.model('userModel',userSchema);
