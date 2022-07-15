@@ -48,12 +48,12 @@ userSchema.pre('save',function(){
     this.confirmPassword=undefined;
 });
 
-userSchema.pre('save',async function(){
-    let salt=await bcrypt.genSalt();
-    let hashedString=await bcrypt.hash(this.password,salt);
-    //console.log(hashedString);
-    this.password=hashedString;
-})
+// userSchema.pre('save',async function(){
+//     let salt=await bcrypt.genSalt();
+//     let hashedString=await bcrypt.hash(this.password,salt);
+//     //console.log(hashedString);
+//     this.password=hashedString;
+// })
 
 //after save event occurs in db
 userSchema.post('save',function(doc){

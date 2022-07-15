@@ -1,47 +1,32 @@
 const express=require('express');
-const userModel=require('./models/userModels');
+const userModel=require('./models/userModel');
 const app=express();
+const cookieParser=require('cookie-parser');
 
 //middleware function->post, front->json
 app.use(express.json());
 app.listen(3000);
+app.use(cookieParser());
 
 //mini app
-const signUpRouter=express.Router();
+const userRouter=require('./Routers/userRouter');
+const signUpRouter=require('./Routers/signUpRouter');
 
 //base route,router to use
+app.use('/users',userRouter);
 app.use('/auth',signUpRouter);
 
-signUpRouter
-.route('/signup')
-.get(middleware1,getSignUp,middleware2)
-.post(postSignUp)
+// userRouter
+// .route('/setCookie')
+// .get(setCookie)
 
-function middleware1(req,res,next){
-    console.log('Middleware 1 gets called');
-    next();
-}
-function middleware2(req,res){
-    console.log('Middleware 2 gets called');
-    console.log('Middleware 2 has ended the request/response cycle');
-    res.sendFile('/views/form.html',{root:__dirname});
-}
+// userRouter
+// .route('/getCookie')
+// .get(getCookie)
 
-function getSignUp(req,res,next){
-    console.log('Get signup called');
-    //res.sendFile('/views/form.html',{root:__dirname});
-    next();
-}
-
-async function postSignUp(req,res){
-    //let obj=req.body;
-    let dataObj=req.body;
-    let user=await userModel.create(dataObj);
-    //console.log('Backend:',user);
-    res.json({
-        message:"User signed up successfully",
-        data:user
-    });
-}
+// signUpRouter
+// .route('/signup')
+// .get(middleware1,getSignUp,middleware2)
+// .post(postSignUp)
 
 
