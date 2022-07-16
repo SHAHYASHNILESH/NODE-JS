@@ -3,6 +3,7 @@ const signUpRouter=express.Router();
 const userModel=require('../models/userModel');
 const jwt=require('jsonwebtoken');
 const JWT_KEY=require('../secrets')
+
 signUpRouter
 .route('/signup')
 .get(middleware1,getSignUp,middleware2)
