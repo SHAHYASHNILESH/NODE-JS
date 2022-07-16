@@ -47,7 +47,8 @@ const userSchema=mongoose.Schema({
     profileImage:{
         type:String,
         default:'img/users/default.jpeg'
-    }
+    },
+    resetToken:String
 });
 
 //pre-post hooks
