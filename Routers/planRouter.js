@@ -1,10 +1,10 @@
 const express=require('express');
-const { isAuthorised, protectRoute } = require('../controller/authController');
+const { isAuthorised, protectRoute} = require('../controller/authController');
 const planRouter=express.Router();
 
 //gets all plans
 planRouter
-.route('/getAllPlans')
+.route('/allPlans')
 .get(getAllPlans)
 
 //own plan->check logged in or not 
