@@ -1,7 +1,7 @@
 const mongoose=require('mongoose');
 const emailValidator=require('email-validator');
 const bcrypt=require('bcrypt');
-
+const crypto=require('crypto');
 
 const db_link='mongodb+srv://admin:RSZHek7KCmdYYSPn@cluster0.ptf4r.mongodb.net/?retryWrites=true&w=majority';
 
@@ -74,6 +74,18 @@ userSchema.post('save',function(doc){
 
 
 const userModel=mongoose.model('userModel',userSchema);
+
+userSchema.methods.createResetToken=function(){
+    const resetToken=crypto.randomBytes(32).toString('hex');
+    this.resetToken=resetToken;
+    return resetToken;
+}
+
+userSchema.methods.resetPasswordHandler=function(password,confirmPassword){
+    this.password=password;
+    this.confirmPassword=confirmPassword;
+    this.resetToken=undefined;
+}
 
 module.exports=userModel;
 

@@ -3,8 +3,9 @@ const userRouter=express.Router();
 
 const {getUser,getAllUsers,postUser,patchUser,deleteUser}=require('../controller/userController');
 const {signup,isAuthorised,loginUser,protectRoute}=require('../controller/authController');
-const {forgetpassword,resetpassword}=require('../controller/authController');
+const {forgetpassword,resetpassword,logout}=require('../controller/authController');
 const app=express();
+
 // userRouter
 // .route('/')
 // .get(protectRoute,getUser)
@@ -43,6 +44,10 @@ userRouter
 userRouter
 .route('/resetpassword/:token')
 .post(resetpassword)
+
+userRouter
+.route('/logout')
+.get(logout)
 
 //Profile Page
 userRouter.use(protectRoute);

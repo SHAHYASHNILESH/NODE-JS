@@ -1,6 +1,7 @@
 const express=require('express');
 const mongoose=require('mongoose');
 const userModel=require('./models/userModel');
+const planModels=require('./models/planModels');
 const app=express();
 
 //middleware function->post, frontend->json

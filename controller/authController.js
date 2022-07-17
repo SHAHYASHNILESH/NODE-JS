@@ -104,6 +104,10 @@ module.exports.protectRoute=async function protectRoute(req,res,next){
             // });
         }
         else{
+            const client=req.get('User-Agent');
+            if(client.includes("Mozilla")==true){
+                return res.redirect('/login');
+            }
             res.json({
                 message:"User Not verified"
 
@@ -159,7 +163,7 @@ module.exports.resetpassword=async function resetpassword(req,res){
         user.resetPasswordHandler(password,confirmPassword);
         user.save();
         res.json({
-            message:"Password changed successfully and please login again"
+            message:"Password changed successfully and Please login again"
         });
 
     }
@@ -176,4 +180,12 @@ module.exports.resetpassword=async function resetpassword(req,res){
     });
   }
 
+}
+
+
+module.exports.logout=function logout(req,res){
+    res.cookie('login',' ',{maxAge:1});
+    res.json({
+        message:"User Logged out successfully"
+    })
 }
