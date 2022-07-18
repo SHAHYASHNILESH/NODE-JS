@@ -8,28 +8,30 @@ const app=express();
 app.use(express.json());
 app.listen(3000);
 
-let users=[
-    {
-        'id':1,
-        'Name':'Yash'
-    },
+// let users=[
+//     {
+//         'id':1,
+//         'Name':'Yash'
+//     },
 
-    {
-        'id':2,
-        'Name':'Nilesh'
-    },
-    {
-        'id':3,
-        'Name':'Pinal'
-    }
+//     {
+//         'id':2,
+//         'Name':'Nilesh'
+//     },
+//     {
+//         'id':3,
+//         'Name':'Pinal'
+//     }
 
-];
+// ];
 
 //mini app
 const userRouter=require('./Routers/userRouter');
+const planRouter=require('./Routers/planRouter');
 
 //base route,router to use
 app.use('/users',userRouter);
+app.use('/plans',planRouter);
 
 // userRouter
 // .route('/')

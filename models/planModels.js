@@ -38,19 +38,19 @@ const planSchema=mongoose.Schema({
 
 
 const planModels=mongoose.model('planModels',planSchema);
-(async function createPlan(){
-    let planObj={
-        name:'SuperFood101',
-        duration:30,
-        price:1000,
-        ratingsAverage:4,
-        discount:30
-    }
-    let data=await planModels.create(planObj);
-    console.log(data);
-    // const doc=new planModels(planObj);
-    // await doc.save();
+// (async function createPlan(){
+//     let planObj={
+//         name:'SuperFood101',
+//         duration:30,
+//         price:1000,
+//         ratingsAverage:4,
+//         discount:30
+//     }
+//     let data=await planModels.create(planObj);
+//     console.log(data);
+//     // const doc=new planModels(planObj);
+//     // await doc.save();
 
-})();
+// })();
 
 module.exports=planModels;

@@ -11,10 +11,12 @@ app.use(cookieParser());
 //mini app
 const userRouter=require('./Routers/userRouter');
 const signUpRouter=require('./Routers/signUpRouter');
+const planRouter=require('./Routers/planRouter');
 
 //base route,router to use
 app.use('/users',userRouter);
 app.use('/auth',signUpRouter);
+app.use('/plans',planRouter);
 
 // userRouter
 // .route('/setCookie')
