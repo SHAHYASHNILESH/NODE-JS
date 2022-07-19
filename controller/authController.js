@@ -2,6 +2,7 @@ const express=require('express');
 const userModel=require('../models/userModel');
 const jwt=require('jsonwebtoken');
 const JWT_KEY=require('../secrets');
+const { sendMail } = require('../utility/nodemailer');
 
 //user signup
 module.exports.signup=async function postSignUp(req,res){
@@ -9,6 +10,7 @@ module.exports.signup=async function postSignUp(req,res){
     //let obj=req.body;
     let dataObj=req.body;
     let user=await userModel.create(dataObj);
+    sendMail("signup",user);
     if(user){
         //console.log('Backend:',user);
         res.json({
@@ -137,6 +139,12 @@ module.exports.forgetpassword=async function forgetpassword(req,res){
             const resetToken=user.createResetToken();
             let resetPasswordLink=`${req.protocol}://${req.get('host')}/resetpassword/${resetToken}`;
             //send email to user
+            let obj={
+                resetPasswordLink:resetPasswordLink,
+                email:email
+            }
+            sendMail('resetpassword',obj)
+            
             //nodemailer
         }
         else{
