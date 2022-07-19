@@ -113,6 +113,7 @@ module.exports.updatePlan=async function updatePlan(req,res){
     }
 }
 
+
 module.exports.top3plan=async function top3plan(req,res){
     try{
         const plans=await planModels.find().sort({
