@@ -13,13 +13,13 @@ const userRouter=require('./Routers/userRouter');
 const signUpRouter=require('./Routers/signUpRouter');
 const planRouter=require('./Routers/planRouter');
 const reviewRouter=require('./Routers/reviewRouter');
-
+const bookingRouter=require('./Routers/bookingRouter');
 //base route,router to use
 app.use('/users',userRouter);
 app.use('/auth',signUpRouter);
 app.use('/plans',planRouter);
 app.use('/reviews',reviewRouter);
-
+app.use('/booking',bookingRouter);
 
 // userRouter
 // .route('/setCookie')

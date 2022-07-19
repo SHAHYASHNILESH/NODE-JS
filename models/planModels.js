@@ -33,7 +33,12 @@ const planSchema=mongoose.Schema({
         validate:[function(){
             return this.discount<100;
         },'Discount should not exceed the price']
+    },
+    noOfSchema:{
+        type:Number,
+        default:0
     }
+
 });
 
 

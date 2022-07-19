@@ -69,7 +69,8 @@ module.exports.createReview=async function createReview(req,res){
         let plan=await planModels.findById(id);
         let data=req.body;
         const review=await reviewModel.create(data);
-        plan.ratingsAverage=(plan.ratingsAverage+data.ratings)/2;
+        const noOfSchema=plan.noOfSchema+1;
+        plan.ratingsAverage=(plan.ratingsAverage+data.ratings)/(noOfSchema);
         await plan.save();
         if(review){
             res.json({

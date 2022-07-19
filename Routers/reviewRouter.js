@@ -1,5 +1,6 @@
 const express=require('express');
 const reviewRouter=express.Router();
+const {getAllReviews,top3Reviews,getPlanReview,createReview,updateReview,deleteReview}=require('../controller/reviewController');
 
 reviewRouter
 .route('/allReviews')
