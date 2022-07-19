@@ -89,15 +89,22 @@ module.exports.updatePlan=async function updatePlan(req,res){
     try{
         let id=req.params.id;
         let dataToBeUpdated=req.body;
+        // console.log(id);
+        // console.log(dataToBeUpdated);
         let plan=await planModels.findById(id);
         let keys=[];
-        for (let key in keys){
+        for (let key in dataToBeUpdated){
             keys.push(key);
         }
         for(let i=0;i<keys.length;i++){
             plan[keys[i]]=dataToBeUpdated[keys[i]];
         }
-        await plan.save();
+        const updatedData=await plan.save();
+        //console.log(plan);
+        res.json({
+            message:"Data updated successfully",
+            data:plan
+        })
     }
     catch(err){
         res.status(500).json({
