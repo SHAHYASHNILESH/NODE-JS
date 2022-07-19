@@ -7,14 +7,14 @@ reviewRouter
 
 reviewRouter
 .route('/top3')
-.get(top3reviews)
+.get(top3Reviews)
 
 reviewRouter
 .route('/:id')
 .get(getPlanReview)
 
 reviewRouter
-.route('/')
+.route('/:plan')
 .post(createReview)
 
 reviewRouter
